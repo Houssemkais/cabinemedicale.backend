@@ -4,8 +4,6 @@ import com.pfe.Controller.AppointmentCreateModel;
 import com.pfe.Controller.AppointmentUpdateModel;
 import com.pfe.Repository.AppointmentRepository;
 import com.pfe.entities.Appointment;
-import com.pfe.entities.Doctor;
-import com.pfe.entities.Patient;
 import com.pfe.exception.DomainException;
 import com.pfe.exception.Error;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +21,9 @@ public class AppointmentService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AuthenticationFacade authenticationFacade;
+
     public Appointment create(AppointmentCreateModel appointmentCreateModel) throws DomainException {
         Appointment appointment = new Appointment();
         appointment.setDate(appointmentCreateModel.getDate());
@@ -30,7 +31,8 @@ public class AppointmentService {
         log.info(appointmentCreateModel.toString());
         appointment.setPatient(userService.findPatientById(appointmentCreateModel.getPatient_id()));
         appointment.setDoctor(userService.findDoctorById(appointmentCreateModel.getDoctor_id()));
-        appointment.setCreatedBy(userService.findById(appointmentCreateModel.getCreatedBy_id()));
+        appointment.setCreatedBy(authenticationFacade.getConnectedUser());
+        appointment.setStatus(appointmentCreateModel.getStatus().PLANIFIE);
         return appointmentRepository.save(appointment);
     }
 
@@ -38,6 +40,7 @@ public class AppointmentService {
         Appointment appointment = this.findById(id);
         appointment.setDate(appointmentUpdateModel.getDate());
         appointment.setReason(appointmentUpdateModel.getReason());
+        appointment.setStatus(appointmentUpdateModel.getStatus().PLANIFIE);
         return appointmentRepository.save(appointment);
     }
 

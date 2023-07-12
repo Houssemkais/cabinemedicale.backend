@@ -1,5 +1,6 @@
 package com.pfe.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.pfe.utils.AbstractEntity;
@@ -53,19 +54,26 @@ public class User extends AbstractEntity implements UserDetails {
     private String lastname;
     @NotEmpty(message = "firstname can't be null")
     private String firstname;
+    @NotNull(message = "sexe can't be null")
+    private Sexe sex;
     @NotEmpty(message = "email can't be null")
     //@Pattern(regexp="^(.+)@(\\S+) $", message="Please provide a valid email address")
     private String email;
     @NotEmpty(message = "password can't be null")
     private String password;
     @NotNull(message = "date of birth can't be null")
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern="dd-MM-yyyy")
     private Date dateOfBirth;
     @NotEmpty(message = "phone can't be null")
     private String phone;
     @NotEmpty(message = "address can't be null")
     private String address;
+
     @NotNull(message = "role can't be null")
+
     private UserRole userRole;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

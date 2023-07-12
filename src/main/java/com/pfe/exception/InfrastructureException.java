@@ -26,4 +26,8 @@ public class InfrastructureException extends Exception {
         super(message, cause, enableSuppression, writableStackTrace);
         this.error = error;
     }
+
+    public Error getError() {
+        return error;
+    }
 }

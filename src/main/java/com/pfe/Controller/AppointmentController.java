@@ -1,8 +1,10 @@
 package com.pfe.Controller;
 
 import com.pfe.entities.Appointment;
+import com.pfe.entities.User;
 import com.pfe.exception.DomainException;
 import com.pfe.services.AppointmentService;
+import com.pfe.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -19,9 +22,12 @@ public class AppointmentController {
     @Autowired
     AppointmentService appointmentService;
 
+    @Autowired
+    UserService userService;
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    @RolesAllowed(value = {"SECRATARY", "PATIENT"})
+    @RolesAllowed(value = {"ADMIN", "SECRATARY", "PATIENT"})
     public Appointment create(@Valid @RequestBody AppointmentCreateModel a) throws DomainException {
         return appointmentService.create(a);
     }

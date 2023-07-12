@@ -15,7 +15,7 @@ public class Patient extends User{
     public Patient() {
         this.setUserRole(UserRole.PATIENT);
     }
-    private Sexe sex;
+
     private float weight;
     private float size;
 

@@ -1,5 +1,6 @@
 package com.pfe.Controller;
 
+import com.pfe.entities.Status;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -12,4 +13,6 @@ public class AppointmentUpdateModel {
     private Date date;
     @NotEmpty(message = "Reason can't be null")
     private String reason;
+    @NotNull(message = "")
+    private Status status;
 }

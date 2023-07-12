@@ -7,6 +7,7 @@ import com.pfe.exception.Error;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
 
     public User create(User user) throws DomainException {
         if (userRepository.findUserByEmail(user.getEmail()).isPresent()) {
@@ -31,7 +33,7 @@ public class UserService {
         userUpdated.setId(id);
         return userRepository.save(userUpdated);
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     public void delete(Integer id) {
         userRepository.deleteById(id);
     }
@@ -45,18 +47,23 @@ public class UserService {
     }
 
     public Patient findPatientById(Integer id) throws DomainException {
-        return (Patient) userRepository.findPatientByIdAndUserRole(id, UserRole.PATIENT);
+        return (Patient) userRepository.findPatientByIdAndUserRole(id, UserRole.PATIENT).orElseThrow(() -> new DomainException(Error.NOT_FOUND_EXCEPTION));
     }
 
     public Doctor findDoctorById(Integer id) throws DomainException {
-        return (Doctor) userRepository.findPatientByIdAndUserRole(id, UserRole.DOCTOR);
+        return (Doctor) userRepository.findPatientByIdAndUserRole(id, UserRole.DOCTOR).orElseThrow(() -> new DomainException(Error.NOT_FOUND_EXCEPTION));
     }
 
     public Secretary findSecretaryById(Integer id) throws DomainException {
-        return (Secretary) userRepository.findPatientByIdAndUserRole(id, UserRole.SECRETAIRE);
+        return (Secretary) userRepository.findPatientByIdAndUserRole(id, UserRole.SECRETARY).orElseThrow(() -> new DomainException(Error.NOT_FOUND_EXCEPTION));
     }
 
     public User findUserByEmail(String email) throws DomainException {
         return userRepository.findUserByEmail(email).orElseThrow(() -> new DomainException(Error.NOT_FOUND_EXCEPTION));
     }
+
+//    public void updatePassword(String password, Integer id) {
+//        userRepository.updatePassword(password, id);
+//    }
+
 }

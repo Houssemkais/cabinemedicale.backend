@@ -11,6 +11,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findUserByEmail(String email);
 
-    User findPatientByIdAndUserRole(Integer id, UserRole userRole);
+    Optional<User> findPatientByIdAndUserRole(Integer id, UserRole userRole);
+   // void updatePassword(String password, Integer id);
 
 }

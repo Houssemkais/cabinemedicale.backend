@@ -1,13 +1,11 @@
 package com.pfe.utils;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.PreUpdate;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -17,7 +15,12 @@ public abstract class AbstractEntity implements Serializable {
 
 
     @Builder.Default
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="dd-MM-yyyy hh:mm:ss")
     protected LocalDateTime createdAt = LocalDateTime.now();
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="dd-MM-yyyy hh:mm:ss")
     protected LocalDateTime updatedAt;
 
     public AbstractEntity() {

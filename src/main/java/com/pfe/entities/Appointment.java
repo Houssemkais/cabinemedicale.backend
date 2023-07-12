@@ -2,6 +2,7 @@ package com.pfe.entities;
 import lombok.Data;
 import lombok.ToString;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 @Data
 @Entity
@@ -18,5 +19,10 @@ public class Appointment {
     private Doctor doctor;
     @ManyToOne
     private Patient patient;
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "status can't be null")
+    private Status status;
+
 
 }

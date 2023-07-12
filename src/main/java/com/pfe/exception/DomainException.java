@@ -27,4 +27,8 @@ public class DomainException extends Exception {
         super(message, cause, enableSuppression, writableStackTrace);
         this.error = error;
     }
+
+    public Error getError() {
+        return error;
+    }
 }

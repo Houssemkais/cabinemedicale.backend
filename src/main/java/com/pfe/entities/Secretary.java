@@ -12,7 +12,7 @@ import java.util.Set;
 public class Secretary extends User{
 
     public Secretary() {
-        this.setUserRole(UserRole.SECRETAIRE);
+        this.setUserRole(UserRole.SECRETARY);
     }
 
 }

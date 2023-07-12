@@ -1,17 +1,13 @@
 package com.pfe.configuration;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
+@AllArgsConstructor
 public class JwtResponseModel implements Serializable {
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-    private final String token;
-    public JwtResponseModel(String token) {
-        this.token = token;
-    }
-    public String getToken() {
-        return token;
-    }
+    private String token;
+
 }

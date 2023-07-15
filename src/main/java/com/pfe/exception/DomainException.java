@@ -28,6 +28,10 @@ public class DomainException extends Exception {
         this.error = error;
     }
 
+    public DomainException(String s) {
+    }
+
+
     public Error getError() {
         return error;
     }

@@ -10,7 +10,9 @@ public enum Error {
 
     BAD_CREDENTIEL(403, "Bad credentiel"),
 
-    UNOTHORIZED(401, "UNOTHORIZED");
+    UNOTHORIZED(401, "UNOTHORIZED"), INVALID_RESET_TOKEN(400,"Bad request" ), EXPIRED_RESET_TOKEN(400, "expired");
+
+
 
     int code;
     String error;

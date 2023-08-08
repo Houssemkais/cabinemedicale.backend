@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Data
@@ -20,14 +21,9 @@ import java.util.Date;
 public class AppointmentCreateModel {
 
     private boolean isAvailable;
-    private Date date;
-
-
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-   /* private LocalDateTime startDateTime;
-    private LocalDateTime endDateTime;*/
+    private LocalDate date;
+    private LocalTime startTime;
+    private LocalTime endTime;
     @NotEmpty(message = "Reason can't be null")
     private String reason;
     @NotNull(message = "")

@@ -54,8 +54,8 @@ public class AppointmentController {
     @PutMapping(path = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
 
-    public Appointment update(@PathVariable(value = "id") Integer id, @Valid @RequestBody AppointmentUpdateModel appointmentUpdateModel) throws DomainException {
-        return appointmentService.update(id, appointmentUpdateModel);
+    public Appointment update(@PathVariable(value = "id") Integer id, @Valid @RequestBody AppointmentUpdateModel appointmentUpdateModel ) throws DomainException {
+        return appointmentService.update(id, appointmentUpdateModel );
     }
 
     @DeleteMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)

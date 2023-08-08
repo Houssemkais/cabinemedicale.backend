@@ -27,6 +27,10 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+//    public void updatePassword(User user) {
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        userRepository.save(user);
+//    }
 
     public User update(Integer id, User userUpdated) throws DomainException {
         User user = this.findById(id);
@@ -62,8 +66,6 @@ public class UserService {
         return userRepository.findUserByEmail(email).orElseThrow(() -> new DomainException(Error.NOT_FOUND_EXCEPTION));
     }
 
-//    public void updatePassword(String password, Integer id) {
-//        userRepository.updatePassword(password, id);
-//    }
+
 
 }

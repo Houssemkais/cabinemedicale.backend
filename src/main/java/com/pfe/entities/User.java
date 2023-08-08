@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
@@ -62,11 +63,12 @@ public class User extends AbstractEntity implements UserDetails {
     @NotEmpty(message = "password can't be null")
     private String password;
     @NotNull(message = "date of birth can't be null")
-    @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern="dd-MM-yyyy")
-    private Date dateOfBirth;
+
+
+    private LocalDate dateOfBirth;
     @NotEmpty(message = "phone can't be null")
     private String phone;
+    private String commentaries;
     @NotEmpty(message = "address can't be null")
     private String address;
 

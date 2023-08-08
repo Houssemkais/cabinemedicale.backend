@@ -8,21 +8,25 @@ import javax.validation.constraints.NotNull;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 @Data
 public class AppointmentUpdateModel {
     private boolean isAvailable;
-    private Date date;
+    private LocalDate date;
 
 
-    public boolean isAvailable() {
-        return isAvailable;
-    }
+    private LocalTime startTime;
+    private LocalTime endTime;
+
   /*  private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;*/
     @NotEmpty(message = "Reason can't be null")
     private String reason;
     @NotNull(message = "")
     private Status status;
+
+    @NotNull(message = "")
+    private Integer doctor_id;
 }

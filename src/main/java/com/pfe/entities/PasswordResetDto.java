@@ -17,4 +17,5 @@ public class PasswordResetDto {
     @NotEmpty
     private String token;
 
+
 }

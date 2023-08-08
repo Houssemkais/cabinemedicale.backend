@@ -9,8 +9,9 @@ import com.pfe.exception.DomainException;
 import com.pfe.services.EmailService;
 import com.pfe.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,8 +30,8 @@ public class PasswordForgotController {
     @Autowired
     private EmailService emailService;
 
-    @PostMapping
-    public void processForgotPasswordForm(@ModelAttribute("forgotPasswordForm") @Valid PasswordForgotDto form) throws DomainException {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void processForgotPasswordForm(@Valid @RequestBody PasswordForgotDto form) throws DomainException {
         User user = userService.findUserByEmail(form.getEmail());
         if (user == null) {
             throw new DomainException(com.pfe.exception.Error.USER_EMAIL_NOT_FOUND);
